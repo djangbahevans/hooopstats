@@ -95,7 +95,7 @@ func (s *StatsService) GetTeamStatsAverage(teamid int64) (models.StatsAverage, e
 		SUM(s.fouls) as total_fouls,
 		SUM(s.turnovers) as total_turnovers,
 		SUM(s.minutes_played) as total_minutes_played,
-		COUNT(DISTINCT s.game_number) as games_played,
+		COUNT(DISTINCT s.game_number) as games_played
 	FROM stats s
 	JOIN players p ON s.player_id = p.id
 	WHERE p.team_id = $1
