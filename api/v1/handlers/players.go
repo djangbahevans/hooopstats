@@ -87,7 +87,11 @@ func (h *PlayerHandler) CreatePlayer(w http.ResponseWriter, r *http.Request) {
 	resp := models.Response{
 		Status:  "success",
 		Message: "player created",
-		Data:    player,
+		Data: models.Player{
+			Id:        player,
+			FirstName: req.FirstName,
+			LastName:  req.LastName,
+		},
 	}
 
 	w.Header().Set("Content-Type", "application/json")
