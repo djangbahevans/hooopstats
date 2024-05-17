@@ -99,7 +99,7 @@ func (h *TeeamHandler) CreateTeam(w http.ResponseWriter, r *http.Request) {
 
 func validateTeamRequest(r *http.Request) (*models.CreateTeamRequest, error) {
 	var req models.CreateTeamRequest
-	if err := decode(r, req); err != nil {
+	if err := decode(r, &req); err != nil {
 		return nil, err
 	}
 
