@@ -14,7 +14,7 @@ func main() {
 	database := db.NewDB()
 	defer database.Close()
 
-	server := api.NewAPIServer(":8000", nil)
+	server := api.NewAPIServer(":8000", database)
 	server.Run()
 
 	go func() {
@@ -24,5 +24,4 @@ func main() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	<-c
-
 }

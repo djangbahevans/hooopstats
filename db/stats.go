@@ -5,7 +5,7 @@ import (
 )
 
 type StatsRepository interface {
-	CreateStats(stats *models.CreateStatsRequest) (*models.StatsResponse, error)
+	CreateStats(stats *models.CreateStatsRequest) (*models.Response, error)
 	GetStats() (*models.Stats, error)
 	GetStatsByPlayerID(playerID int) (*models.Stats, error)
 }
@@ -18,7 +18,7 @@ func NewStatsRepo(db DB) *StatsRepo {
 	return &StatsRepo{db}
 }
 
-func (r *StatsRepo) CreateStats(stats *models.CreateStatsRequest) (*models.StatsResponse, error) {
+func (r *StatsRepo) CreateStats(stats *models.CreateStatsRequest) (*models.Response, error) {
 	_, err := r.db.Exec(`
 	INSERT INTO stats (
     points,
@@ -39,10 +39,10 @@ func (r *StatsRepo) CreateStats(stats *models.CreateStatsRequest) (*models.Stats
 		return nil, err
 	}
 
-	return &models.StatsResponse{
+	return &models.Response{
 		Status:  "success",
 		Message: "Stats created",
-		PlayerStats: models.Stats{
+		Data: models.Stats{
 			Points:        stats.Points,
 			Rebounds:      stats.Rebounds,
 			Assists:       stats.Assists,

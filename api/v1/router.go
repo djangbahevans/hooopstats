@@ -8,8 +8,10 @@ import (
 )
 
 func RegisterV1Handlers(r *http.ServeMux, db *db.DB) {
-	stats := http.NewServeMux()
-	handlers.RegisterStatHandler(stats, db)
+	v1 := http.NewServeMux()
+	handlers.RegisterStatHandler(v1, db)
+	handlers.RegisterTeamHandler(v1, db)
+	handlers.RegisterPlayerHandler(v1, db)
 	
-	r.Handle("/v1/", http.StripPrefix("/v1", stats))
+	r.Handle("/v1/", http.StripPrefix("/v1", v1))
 }
